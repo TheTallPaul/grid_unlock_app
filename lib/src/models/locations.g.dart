@@ -6,20 +6,20 @@ part of 'locations.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-LatLng _$LatLngFromJson(Map<String, dynamic> json) {
-  return LatLng(
+LatitudeLongitude _$LatitudeLongitudeFromJson(Map<String, dynamic> json) {
+  return LatitudeLongitude(
       lat: (json['lat'] as num)?.toDouble(),
       lng: (json['lng'] as num)?.toDouble());
 }
 
-Map<String, dynamic> _$LatLngToJson(LatLng instance) =>
+Map<String, dynamic> _$LatitudeLongitudeToJson(LatitudeLongitude instance) =>
     <String, dynamic>{'lat': instance.lat, 'lng': instance.lng};
 
 Region _$RegionFromJson(Map<String, dynamic> json) {
   return Region(
       coords: json['coords'] == null
           ? null
-          : LatLng.fromJson(json['coords'] as Map<String, dynamic>),
+          : LatitudeLongitude.fromJson(json['coords'] as Map<String, dynamic>),
       id: json['id'] as String,
       name: json['name'] as String,
       zoom: (json['zoom'] as num)?.toDouble());

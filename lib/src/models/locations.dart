@@ -1,19 +1,18 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:http/http.dart' as http;
 import 'package:json_annotation/json_annotation.dart';
 
 part 'locations.g.dart';
 
 @JsonSerializable()
-class LatLng {
-  LatLng({
+class LatitudeLongitude {
+  LatitudeLongitude({
     this.lat,
     this.lng,
   });
 
-  factory LatLng.fromJson(Map<String, dynamic> json) => _$LatLngFromJson(json);
-  Map<String, dynamic> toJson() => _$LatLngToJson(this);
+  factory LatitudeLongitude.fromJson(Map<String, dynamic> json) =>
+      _$LatitudeLongitudeFromJson(json);
+
+  Map<String, dynamic> toJson() => _$LatitudeLongitudeToJson(this);
 
   final double lat;
   final double lng;
@@ -29,9 +28,10 @@ class Region {
   });
 
   factory Region.fromJson(Map<String, dynamic> json) => _$RegionFromJson(json);
+
   Map<String, dynamic> toJson() => _$RegionToJson(this);
 
-  final LatLng coords;
+  final LatitudeLongitude coords;
   final String id;
   final String name;
   final double zoom;
@@ -51,6 +51,7 @@ class Office {
   });
 
   factory Office.fromJson(Map<String, dynamic> json) => _$OfficeFromJson(json);
+
   Map<String, dynamic> toJson() => _$OfficeToJson(this);
 
   final String address;
@@ -72,23 +73,9 @@ class Locations {
 
   factory Locations.fromJson(Map<String, dynamic> json) =>
       _$LocationsFromJson(json);
+
   Map<String, dynamic> toJson() => _$LocationsToJson(this);
 
   final List<Office> offices;
   final List<Region> regions;
-}
-
-Future<Locations> getGoogleOffices() async {
-  const googleLocationsURL = 'https://about.google/static/data/locations.json';
-
-  // Retrieve the locations of Google offices
-  final response = await http.get(googleLocationsURL);
-  if (response.statusCode == 200) {
-    return Locations.fromJson(json.decode(response.body));
-  } else {
-    throw HttpException(
-        'Unexpected status code ${response.statusCode}:'
-            ' ${response.reasonPhrase}',
-        uri: Uri.parse(googleLocationsURL));
-  }
 }

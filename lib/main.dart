@@ -1,50 +1,68 @@
+import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:grid_unlock/src/locations.dart' as locations;
 
-void main() => runApp(MyApp());
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MyApp extends StatefulWidget {
+import 'package:grid_unlock/src/blocs/blocs.dart';
+import 'package:grid_unlock/src/repositories/repositories.dart';
+import 'package:grid_unlock/src/widgets/widgets.dart';
+
+class SimpleBlocDelegate extends BlocDelegate {
   @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  final Map<String, Marker> _markers = {};
-
-  Future<void> _onMapCreated(GoogleMapController controller) async {
-    final googleOffices = await locations.getGoogleOffices();
-    setState(() {
-      _markers.clear();
-      for (final office in googleOffices.offices) {
-        final marker = Marker(
-          markerId: MarkerId(office.name),
-          position: LatLng(office.lat, office.lng),
-          infoWindow: InfoWindow(
-            title: office.name,
-            snippet: office.address,
-          ),
-        );
-        _markers[office.name] = marker;
-      }
-    });
+  void onEvent(Bloc bloc, Object event) {
+    super.onEvent(bloc, event);
+    print(event);
   }
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-        home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Grid Unlock'),
-            backgroundColor: Colors.lightGreen,
-          ),
-          body: GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: const LatLng(0, 0),
-              zoom: 2,
-            ),
-            markers: _markers.values.toSet(),
-          ),
-        ),
-      );
+  onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    print(transition);
+  }
+
+  @override
+  void onError(Bloc bloc, Object error, StackTrace stacktrace) {
+    super.onError(bloc, error, stacktrace);
+    print(error);
+  }
+}
+
+void main() {
+  BlocSupervisor.delegate = SimpleBlocDelegate();
+
+  final MapRepository mapRepository =
+      MapRepository(googleMapsApiClient: GoogleMapsApiClient());
+
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider<ThemeBloc>(
+      builder: (context) => ThemeBloc(),
+    ),
+    BlocProvider<MapBloc>(
+      builder: (context) => MapBloc(mapRepository: mapRepository),
+    )
+  ], child: App(mapRepository: mapRepository)));
+}
+
+class App extends StatelessWidget {
+  App({Key key, @required this.mapRepository})
+      : assert(mapRepository != null),
+        super(key: key);
+
+  final MapRepository mapRepository;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider<ThemeBloc>(
+      builder: (context) => ThemeBloc(),
+      child: BlocBuilder<ThemeBloc, ThemeData>(
+        builder: (context, theme) {
+          return MaterialApp(
+            title: 'Grid Unlock',
+            home: MenuPage(),
+            theme: theme,
+          );
+        },
+      ),
+    );
+  }
 }
