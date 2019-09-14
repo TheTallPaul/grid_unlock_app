@@ -6,4 +6,6 @@ abstract class MapEvent extends Equatable {
   MapEvent([List props = const []]) : super(props);
 }
 
+class FetchUserLocation extends MapEvent {}
+
 class FetchOffices extends MapEvent {}
