@@ -25,11 +25,11 @@ class _Choice {
   final IconData icon;
 }
 
-const List<_Choice> _choices = const <_Choice>[
-  const _Choice(title: 'Rider', icon: Icons.directions_walk),
-  const _Choice(title: 'Driver', icon: Icons.directions_car),
-  const _Choice(title: 'Networks', icon: Icons.ac_unit),
-  const _Choice(title: 'Settings', icon: Icons.settings),
+const List<_Choice> _choices = <_Choice>[
+  _Choice(title: 'Rider', icon: Icons.directions_walk),
+  _Choice(title: 'Driver', icon: Icons.directions_car),
+  _Choice(title: 'Networks', icon: Icons.ac_unit),
+  _Choice(title: 'Settings', icon: Icons.settings),
 ];
 
 class _ChoiceCard extends StatelessWidget {
@@ -39,7 +39,7 @@ class _ChoiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextStyle textStyle = Theme.of(context).textTheme.display1;
-    return new GestureDetector(
+    return GestureDetector(
       child: Card(
           child: Center(
         child: Column(

@@ -39,6 +39,9 @@ void main() {
     ),
     BlocProvider<MapBloc>(
       builder: (context) => MapBloc(mapRepository: mapRepository),
+    ),
+    BlocProvider<PermissionsBloc>(
+      builder: (context) => PermissionsBloc(),
     )
   ], child: App(mapRepository: mapRepository)));
 }
@@ -52,6 +55,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final permissionsBloc = BlocProvider.of<PermissionsBloc>(context);
+
+    permissionsBloc.dispatch(RequestLocationPermission());
+
     return BlocProvider<ThemeBloc>(
       builder: (context) => ThemeBloc(),
       child: BlocBuilder<ThemeBloc, ThemeData>(
