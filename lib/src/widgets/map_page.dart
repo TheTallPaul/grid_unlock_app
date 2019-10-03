@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grid_unlock/src/blocs/blocs.dart';
+import 'package:grid_unlock/src/widgets/widgets.dart';
 
 class MapPage extends StatelessWidget {
   @override
@@ -24,14 +25,10 @@ class MapPage extends StatelessWidget {
     mapBloc.dispatch(FetchOffices());
 
     return Scaffold(
-        appBar: AppBar(title: Text('Map'), actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.home),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          )
-        ]),
+        appBar: AppBar(
+          title: Text('Map'),
+        ),
+        drawer: NavigationDrawer(),
         body: BlocListener<MapBloc, MapState>(listener: (context, state) {
           if (state is MapEmpty) {
             mapBloc.dispatch(FetchOffices());

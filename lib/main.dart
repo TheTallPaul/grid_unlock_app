@@ -65,7 +65,7 @@ class App extends StatelessWidget {
         builder: (context, theme) {
           return MaterialApp(
             title: 'Grid Unlock',
-            home: MenuPage(),
+            home: MapPage(),
             theme: theme,
           );
         },
