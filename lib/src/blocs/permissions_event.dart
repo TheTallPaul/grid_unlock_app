@@ -3,9 +3,17 @@ import 'package:flutter/material.dart';
 
 @immutable
 abstract class PermissionsEvent extends Equatable {
-  PermissionsEvent([List props = const []]) : super(props);
+  PermissionsEvent([List props = const []]) : super();
 }
 
-class RequestLocationPermission extends PermissionsEvent {}
+class RequestLocationPermission extends PermissionsEvent {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
 
-class CheckPermissions extends PermissionsEvent {}
+class CheckPermissions extends PermissionsEvent {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
