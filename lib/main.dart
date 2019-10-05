@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:grid_unlock/src/blocs/blocs.dart';
 import 'package:grid_unlock/src/repositories/repositories.dart';
+import 'package:grid_unlock/src/widgets/utilities/router.dart';
 import 'package:grid_unlock/src/widgets/widgets.dart';
 
 class SimpleBlocDelegate extends BlocDelegate {
@@ -67,6 +68,8 @@ class App extends StatelessWidget {
             title: 'Grid Unlock',
             home: MapPage(),
             theme: theme,
+            onGenerateRoute: Router.generateRoute,
+            initialRoute: Router.mapRoute,
           );
         },
       ),

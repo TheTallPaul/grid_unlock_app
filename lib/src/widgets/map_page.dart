@@ -12,6 +12,8 @@ import 'package:grid_unlock/src/widgets/widgets.dart';
 import 'package:grid_unlock/src/widgets/utilities/keys.dart';
 
 class MapPage extends StatelessWidget {
+  static const routeName = '/map';
+
   @override
   Widget build(BuildContext context) {
     final mapBloc = BlocProvider.of<MapBloc>(context);
@@ -41,7 +43,7 @@ class MapPage extends StatelessWidget {
                     onPressed: () async {
                       Prediction prediction = await PlacesAutocomplete.show(
                         context: context,
-                        apiKey: Keys().kGoogleApiKey,
+                        apiKey: Keys.kGoogleApiKey,
                         mode: Mode.overlay,
                         logo: Container(
                           height: 0,

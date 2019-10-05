@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'utilities/router.dart';
+
 class NavigationDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: 132.0,
+        width: 160.0,
         child: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
@@ -13,18 +15,34 @@ class NavigationDrawer extends StatelessWidget {
               _createDrawerItem(
                 icon: Icons.accessibility_new,
                 text: 'Rider',
+                onTap: () =>
+                    Navigator.pushReplacementNamed(context, Router.mapRoute),
               ),
               _createDrawerItem(
                 icon: Icons.directions_car,
                 text: 'Driver',
+                onTap: () =>
+                    Navigator.pushReplacementNamed(context, Router.mapRoute),
               ),
               _createDrawerItem(
                 icon: Icons.people,
                 text: 'Networks',
+                onTap: () => Navigator.pushReplacementNamed(
+                    context, Router.networksRoute),
               ),
               Divider(),
-              _createDrawerItem(icon: Icons.settings, text: 'Settings'),
-              _createDrawerItem(icon: Icons.account_circle, text: 'Account'),
+              _createDrawerItem(
+                icon: Icons.settings,
+                text: 'Settings',
+                onTap: () => Navigator.pushReplacementNamed(
+                    context, Router.settingsRoute),
+              ),
+              _createDrawerItem(
+                icon: Icons.account_circle,
+                text: 'Account',
+                onTap: () => Navigator.pushReplacementNamed(
+                    context, Router.accountRoute),
+              ),
             ],
           ),
         ));
@@ -32,19 +50,19 @@ class NavigationDrawer extends StatelessWidget {
 
   Widget _createHeader() {
     return Container(
-        height: 80,
+        height: 120,
         child: DrawerHeader(
             margin: EdgeInsets.all(0),
             padding: EdgeInsets.all(0),
-            decoration: BoxDecoration(color: Color(0xFF0175c2)),
+            decoration: BoxDecoration(color: Colors.black),
             child: Stack(children: <Widget>[
               Positioned(
-                top: 14.0,
-                left: 12.0,
+                top: 29.0,
+                left: 20.0,
                 child: Text(
                   "GridUnlock",
                   style: TextStyle(
-                      fontSize: 22.0,
+                      fontSize: 24.0,
                       fontWeight: FontWeight.w600,
                       color: Colors.white),
                 ),
