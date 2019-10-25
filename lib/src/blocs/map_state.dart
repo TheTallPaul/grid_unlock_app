@@ -6,12 +6,20 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class MapState extends Equatable {
-  MapState([List props = const []]) : super(props);
+  MapState([List props = const []]) : super();
 }
 
-class MapEmpty extends MapState {}
+class MapEmpty extends MapState {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
 
-class MapLoading extends MapState {}
+class MapLoading extends MapState {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}
 
 class MapLoaded extends MapState {
   MapLoaded({@required this.markers})
@@ -19,6 +27,14 @@ class MapLoaded extends MapState {
         super([markers]);
 
   final Map<String, Marker> markers;
+
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
 }
 
-class MapError extends MapState {}
+class MapError extends MapState {
+  @override
+  // TODO: implement props
+  List<Object> get props => null;
+}

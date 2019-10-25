@@ -3,11 +3,17 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/places.dart';
 import 'package:grid_unlock/src/blocs/blocs.dart';
 import 'package:grid_unlock/src/widgets/widgets.dart';
 
+import 'package:grid_unlock/src/widgets/utilities/keys.dart';
+
 class MapPage extends StatelessWidget {
+  static const routeName = '/map';
+
   @override
   Widget build(BuildContext context) {
     final mapBloc = BlocProvider.of<MapBloc>(context);
@@ -26,7 +32,28 @@ class MapPage extends StatelessWidget {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Map'),
+          title: Text('Rider'),
+          actions: <Widget>[
+            BlocBuilder<MapBloc, MapState>(builder: (context, state) {
+              if (state is MapLoading) {
+                return Icon(Icons.sync);
+              } else {
+                return IconButton(
+                    icon: Icon(Icons.search),
+                    onPressed: () async {
+                      Prediction prediction = await PlacesAutocomplete.show(
+                        context: context,
+                        apiKey: Keys.kGoogleApiKey,
+                        mode: Mode.overlay,
+                        logo: Container(
+                          height: 0,
+                        ),
+                      );
+                      print(prediction);
+                    });
+              }
+            })
+          ],
         ),
         drawer: NavigationDrawer(),
         body: BlocListener<MapBloc, MapState>(listener: (context, state) {
