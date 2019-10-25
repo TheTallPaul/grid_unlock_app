@@ -63,7 +63,7 @@ packages:
       name: build_resolvers
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.1"
+    version: "1.2.1"
   build_runner:
     dependency: "direct dev"
     description:
@@ -199,21 +199,21 @@ packages:
       name: glob
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.7"
+    version: "1.2.0"
   google_maps_flutter:
     dependency: "direct main"
     description:
       name: google_maps_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.21+7"
+    version: "0.5.21+8"
   google_maps_webservice:
     dependency: "direct main"
     description:
       name: google_maps_webservice
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.15"
+    version: "0.0.16"
   graphs:
     dependency: transitive
     description:
@@ -312,6 +312,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.9.6+3"
+  node_interop:
+    dependency: transitive
+    description:
+      name: node_interop
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
+  node_io:
+    dependency: transitive
+    description:
+      name: node_io
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1+2"
   package_config:
     dependency: transitive
     description:
@@ -346,7 +360,7 @@ packages:
       name: permission_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.2"
+    version: "3.3.0"
   pool:
     dependency: transitive
     description:
@@ -360,7 +374,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.0"
+    version: "3.1.0+1"
   pub_semver:
     dependency: transitive
     description:
@@ -388,7 +402,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.22.2"
+    version: "0.22.4"
   shelf:
     dependency: transitive
     description:
@@ -498,7 +512,7 @@ packages:
       name: web_socket_channel
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.15"
+    version: "1.1.0"
   yaml:
     dependency: transitive
     description:
