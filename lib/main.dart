@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:grid_unlock/src/blocs/blocs.dart';
 import 'package:grid_unlock/src/repositories/repositories.dart';
+import 'package:grid_unlock/src/repositories/style.dart';
 import 'package:grid_unlock/src/widgets/utilities/router.dart';
 import 'package:grid_unlock/src/widgets/widgets.dart';
 
@@ -35,8 +36,8 @@ void main() {
       MapRepository(googleMapsApiClient: GoogleMapsApiClient());
 
   runApp(MultiBlocProvider(providers: [
-    BlocProvider<ThemeBloc>(
-      builder: (context) => ThemeBloc(),
+    BlocProvider<SettingsBloc>(
+      builder: (context) => SettingsBloc(),
     ),
     BlocProvider<MapBloc>(
       builder: (context) => MapBloc(mapRepository: mapRepository),
@@ -56,18 +57,18 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final permissionsBloc = BlocProvider.of<PermissionsBloc>(context);
+    BlocProvider.of<PermissionsBloc>(context).add(RequestLocationPermission());
 
-    permissionsBloc.dispatch(RequestLocationPermission());
-
-    return BlocProvider<ThemeBloc>(
-      builder: (context) => ThemeBloc(),
-      child: BlocBuilder<ThemeBloc, ThemeData>(
-        builder: (context, theme) {
+    return BlocProvider<SettingsBloc>(
+      builder: (context) => SettingsBloc(),
+      child: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) {
           return MaterialApp(
             title: 'Grid Unlock',
             home: MapPage(),
-            theme: theme,
+            theme: state.theme,
+            // For when Dark Theme is enabled in the system drawer
+            darkTheme: nightTheme(),
             onGenerateRoute: Router.generateRoute,
             initialRoute: Router.mapRoute,
           );

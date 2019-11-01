@@ -38,9 +38,16 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       }
     }
 
+    if (event is RefreshRiderDestination) {
+
+    }
+
+    if (event is FetchRiderDestination) {
+      yield MapLoading();
+    }
+
     if (event is FetchUserLocation) {
       yield MapLoading();
-
     }
   }
 }

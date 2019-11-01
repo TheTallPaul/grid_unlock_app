@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
@@ -11,24 +10,40 @@ import 'package:grid_unlock/src/widgets/widgets.dart';
 
 import 'package:grid_unlock/src/widgets/utilities/keys.dart';
 
-class MapPage extends StatelessWidget {
+//class MapPage extends StatelessWidget {
+class MapPage extends StatefulWidget {
   static const routeName = '/map';
 
   @override
+  _MapPageState createState() => _MapPageState();
+}
+
+//  final Completer<GoogleMapController> _googleMapController = Completer();
+class _MapPageState extends State<MapPage> {
+  GoogleMapController _mapController;
+
+  // TO-DO Add switch between nighttime and daytime
+  void changeMapStyle(String filepath) {
+    // Load the JSON in as a string
+    rootBundle.loadString(filepath).then((mapStyle) {
+      // Set the style
+      _mapController.setMapStyle(mapStyle);
+    });
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    _mapController = controller;
+
+    changeMapStyle('assets/maps/daytime_map_style.json');
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final mapBloc = BlocProvider.of<MapBloc>(context);
-    final Completer<GoogleMapController> _googleMapController = Completer();
     final initialCoordinates =
-        const LatLng(45.518880, -122.679133); // Pioneer Courthouse Square
+        LatLng(45.518880, -122.679133); // Pioneer Courthouse Square
     final initialZoom = 16.0;
 
-    void _onMapCreated(GoogleMapController controller) {
-      if (!_googleMapController.isCompleted) {
-        _googleMapController.complete(controller);
-      }
-    }
-
-    mapBloc.dispatch(FetchOffices());
+    BlocProvider.of<MapBloc>(context).add(FetchOffices());
 
     return Scaffold(
         appBar: AppBar(
@@ -58,7 +73,7 @@ class MapPage extends StatelessWidget {
         drawer: NavigationDrawer(),
         body: BlocListener<MapBloc, MapState>(listener: (context, state) {
           if (state is MapEmpty) {
-            mapBloc.dispatch(FetchOffices());
+            BlocProvider.of<MapBloc>(context).add(FetchOffices());
           }
         }, child: BlocBuilder<MapBloc, MapState>(builder: (context, state) {
           if (state is MapLoaded) {

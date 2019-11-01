@@ -54,7 +54,7 @@ class NavigationDrawer extends StatelessWidget {
         child: DrawerHeader(
             margin: EdgeInsets.all(0),
             padding: EdgeInsets.all(0),
-            decoration: BoxDecoration(color: Colors.black),
+            decoration: BoxDecoration(color: Color(0xFF877b62)),
             child: Stack(children: <Widget>[
               Positioned(
                 top: 29.0,

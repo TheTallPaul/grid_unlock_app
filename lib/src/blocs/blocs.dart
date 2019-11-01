@@ -4,5 +4,6 @@ export 'map_state.dart';
 export 'permissions_bloc.dart';
 export 'permissions_event.dart';
 export 'permissions_state.dart';
-export 'theme_bloc.dart';
-export 'theme_event.dart';
+export 'settings_bloc.dart';
+export 'settings_event.dart';
+export 'settings_state.dart';
