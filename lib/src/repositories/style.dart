@@ -32,7 +32,5 @@ ThemeData primaryTheme() {
 }
 
 ThemeData nightTheme(){
-  return ThemeData(
-    primaryColor:  Colors.black
-  );
+  return ThemeData.dark();
 }

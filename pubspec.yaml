@@ -21,8 +21,8 @@ dependencies:
     sdk: flutter
   google_maps_flutter: ^0.5.21+7
   google_maps_webservice: ^0.0.14
-  bloc: ^0.15.0
-  flutter_bloc: ^0.21.0
+  bloc: ^1.0.0
+  flutter_bloc: ^1.0.0
   http: ^0.12.0+2
   json_serializable: ^2.0.2
   equatable: ^0.6.1
@@ -53,6 +53,7 @@ flutter:
 
   assets:
     - assets/
+    - assets/maps/daytime_map_style.json
     - assets/images/networks_splash.png
 
   # To add custom fonts to your application, add a fonts section here,

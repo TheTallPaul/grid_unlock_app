@@ -39,12 +39,11 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    final mapBloc = BlocProvider.of<MapBloc>(context);
     final initialCoordinates =
         LatLng(45.518880, -122.679133); // Pioneer Courthouse Square
     final initialZoom = 16.0;
 
-    mapBloc.dispatch(FetchOffices());
+    BlocProvider.of<MapBloc>(context).add(FetchOffices());
 
     return Scaffold(
         appBar: AppBar(
@@ -74,7 +73,7 @@ class _MapPageState extends State<MapPage> {
         drawer: NavigationDrawer(),
         body: BlocListener<MapBloc, MapState>(listener: (context, state) {
           if (state is MapEmpty) {
-            mapBloc.dispatch(FetchOffices());
+            BlocProvider.of<MapBloc>(context).add(FetchOffices());
           }
         }, child: BlocBuilder<MapBloc, MapState>(builder: (context, state) {
           if (state is MapLoaded) {

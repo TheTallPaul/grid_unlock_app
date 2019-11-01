@@ -6,35 +6,22 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class MapState extends Equatable {
-  MapState([List props = const []]) : super();
+  const MapState();
+
+  @override
+  List<Object> get props => [];
 }
 
-class MapEmpty extends MapState {
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
-}
+class MapEmpty extends MapState {}
 
-class MapLoading extends MapState {
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
-}
+class MapLoading extends MapState {}
 
 class MapLoaded extends MapState {
-  MapLoaded({@required this.markers})
-      : assert(markers != null),
-        super([markers]);
-
+  const MapLoaded({this.markers}) : assert(markers != null);
   final Map<String, Marker> markers;
 
   @override
-  // TODO: implement props
-  List<Object> get props => null;
+  List<Object> get props => [markers];
 }
 
-class MapError extends MapState {
-  @override
-  // TODO: implement props
-  List<Object> get props => null;
-}
+class MapError extends MapState {}

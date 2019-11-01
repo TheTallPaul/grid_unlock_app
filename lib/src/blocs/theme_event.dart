@@ -1,1 +1,0 @@
-enum ThemeEvent { toggle }
