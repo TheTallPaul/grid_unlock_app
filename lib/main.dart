@@ -1,33 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:grid_unlock/src/blocs/blocs.dart';
-import 'package:grid_unlock/src/repositories/repositories.dart';
-import 'package:grid_unlock/src/repositories/style.dart';
-import 'package:grid_unlock/src/widgets/utilities/router.dart';
-import 'package:grid_unlock/src/widgets/widgets.dart';
-
-class SimpleBlocDelegate extends BlocDelegate {
-  @override
-  void onEvent(Bloc bloc, Object event) {
-    super.onEvent(bloc, event);
-    print(event);
-  }
-
-  @override
-  onTransition(Bloc bloc, Transition transition) {
-    super.onTransition(bloc, transition);
-    print(transition);
-  }
-
-  @override
-  void onError(Bloc bloc, Object error, StackTrace stacktrace) {
-    super.onError(bloc, error, stacktrace);
-    print(error);
-  }
-}
+import 'package:grid_unlock/blocs/blocs.dart';
+import 'package:grid_unlock/repositories/repositories.dart';
+import 'package:grid_unlock/repositories/style.dart';
+import 'package:grid_unlock/screens/screens.dart';
+import 'package:grid_unlock/widgets/widgets.dart';
 
 void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
@@ -40,7 +18,7 @@ void main() {
       builder: (context) => SettingsBloc(),
     ),
     BlocProvider<MapBloc>(
-      builder: (context) => MapBloc(mapRepository: mapRepository),
+      builder: (context) => MapBloc(mapRepository, SettingsBloc()),
     ),
     BlocProvider<PermissionsBloc>(
       builder: (context) => PermissionsBloc(),

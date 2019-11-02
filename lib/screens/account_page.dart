@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'package:grid_unlock/src/widgets/widgets.dart';
+import 'package:grid_unlock/widgets/widgets.dart';
 
 class AccountPage extends StatelessWidget {
   static const routeName = '/account';
