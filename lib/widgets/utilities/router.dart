@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../widgets.dart';
+import 'package:grid_unlock/screens/screens.dart';
 
 class Router {
   static const accountRoute = '/account';

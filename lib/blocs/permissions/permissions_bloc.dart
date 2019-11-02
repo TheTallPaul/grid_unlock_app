@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:grid_unlock/src/blocs/blocs.dart';
-
+import 'package:grid_unlock/blocs/blocs.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PermissionsBloc extends Bloc<PermissionsEvent, PermissionsState> {
