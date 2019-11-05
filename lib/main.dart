@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grid_unlock/blocs/blocs.dart';
 import 'package:grid_unlock/repositories/repositories.dart';
-import 'package:grid_unlock/repositories/style.dart';
 import 'package:grid_unlock/screens/screens.dart';
 import 'package:grid_unlock/widgets/widgets.dart';
 
@@ -12,6 +11,7 @@ void main() {
 
   final MapRepository mapRepository =
       MapRepository(googleMapsApiClient: GoogleMapsApiClient());
+  final UserRepository userRepository = UserRepository();
 
   runApp(MultiBlocProvider(providers: [
     BlocProvider<SettingsBloc>(
@@ -22,16 +22,21 @@ void main() {
     ),
     BlocProvider<PermissionsBloc>(
       builder: (context) => PermissionsBloc(),
-    )
-  ], child: App(mapRepository: mapRepository)));
+    ),
+    BlocProvider<AuthenticationBloc>(
+      builder: (context) => AuthenticationBloc(userRepository: userRepository),
+    ),
+  ], child: App(mapRepository: mapRepository, userRepository: userRepository)));
 }
 
 class App extends StatelessWidget {
-  App({Key key, @required this.mapRepository})
+  App(
+      {Key key,
+      @required MapRepository mapRepository,
+      @required UserRepository userRepository})
       : assert(mapRepository != null),
+        assert(userRepository != null),
         super(key: key);
-
-  final MapRepository mapRepository;
 
   @override
   Widget build(BuildContext context) {
