@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "400321471592",
+    "firebase_url": "https://grid-unlock-1570036300375.firebaseio.com",
+    "project_id": "grid-unlock-1570036300375",
+    "storage_bucket": "grid-unlock-1570036300375.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400321471592:android:b91e070b9be5b1b98747dd",
+        "android_client_info": {
+          "package_name": "com.cascadeoctober.grid_unlock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400321471592-o3nr3de1at55aff4q5im556btsdaepks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxX6oTLQnhaslAJRBuqeJ9IzwlTmVpdsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400321471592-o3nr3de1at55aff4q5im556btsdaepks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

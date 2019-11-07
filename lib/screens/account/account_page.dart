@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grid_unlock/blocs/blocs.dart';
-import 'package:grid_unlock/repositories/repositories.dart';
 import 'package:grid_unlock/screens/account/account.dart';
 import 'package:grid_unlock/screens/screens.dart';
+import 'package:user_repository/user_repository.dart';
 
 class AccountPage extends StatelessWidget {
   AccountPage({@required UserRepository userRepository})

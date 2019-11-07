@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:grid_unlock/repositories/repositories.dart';
 import 'package:grid_unlock/screens/screens.dart';
+import 'package:user_repository/user_repository.dart';
 
 class Router {
   static const accountRoute = '/account';
@@ -10,6 +10,7 @@ class Router {
 
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
     UserRepository userRepository = UserRepository();
+
     switch (routeSettings.name) {
       case mapRoute:
         return MaterialPageRoute(builder: (_) => MapPage());
