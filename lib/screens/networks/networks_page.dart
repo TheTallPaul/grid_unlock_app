@@ -5,12 +5,12 @@ import 'package:grid_unlock/screens/account/account.dart';
 import 'package:grid_unlock/screens/screens.dart';
 import 'package:user_repository/user_repository.dart';
 
-class AccountPage extends StatelessWidget {
-  AccountPage({@required UserRepository userRepository})
+class NetworksPage extends StatelessWidget {
+  NetworksPage({@required UserRepository userRepository})
       : assert(userRepository != null),
         _userRepository = userRepository;
 
-  static const routeName = '/account';
+  static const routeName = '/networks';
   final UserRepository _userRepository;
 
   @override
@@ -21,7 +21,7 @@ class AccountPage extends StatelessWidget {
         return LoginScreen(userRepository: _userRepository);
       }
       if (state is Authenticated) {
-        return AccountHome(name: state.displayName);
+        return NetworksHome();
       }
       return SplashScreen();
     });

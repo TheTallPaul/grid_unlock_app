@@ -20,7 +20,8 @@ class Router {
                   userRepository: userRepository,
                 ));
       case networksRoute:
-        return MaterialPageRoute(builder: (_) => NetworksPage());
+        return MaterialPageRoute(
+            builder: (_) => NetworksPage(userRepository: userRepository));
       case settingsRoute:
         return MaterialPageRoute(builder: (_) => SettingsPage());
       default:

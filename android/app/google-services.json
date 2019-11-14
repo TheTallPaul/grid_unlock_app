@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "400321471592-5sn64k8mgjlkjk48i31obiadfhldpphh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cascadeoctober.grid_unlock",
+            "certificate_hash": "4dfdf34294ea72d004694a82244fd105d93204e2"
+          }
+        },
+        {
           "client_id": "400321471592-o3nr3de1at55aff4q5im556btsdaepks.apps.googleusercontent.com",
           "client_type": 3
         }

@@ -7,7 +7,7 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       drawer: NavigationDrawer(),
-      body: Center(child: CircularProgressIndicator()),
+      body: LoadingIndicator(),
     );
   }
 }
