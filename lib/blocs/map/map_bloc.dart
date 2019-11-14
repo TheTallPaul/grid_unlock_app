@@ -9,6 +9,7 @@ import '../blocs.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
   MapBloc(this.mapRepository, this.settingsBloc) {
+    // Listeners
     settingsSubscription = settingsBloc.listen((state) {
       add(UpdateMapTheme(state.darkMode));
     });
@@ -26,32 +27,28 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   @override
   Stream<MapState> mapEventToState(MapEvent event) async* {
     if (event is MapCreated) {
-      yield MapLoaded(event.controller);
+      yield* _mapMapCreatedToState(event);
+    } else if (event is UpdateMapTheme) {
+      yield* _mapUpdateMapThemeToState(event);
     }
+  }
 
-    if (event is UpdateMapTheme) {
-      if (state is MapLoaded) {
-        GoogleMapController mapController = (state as MapLoaded).mapController;
+  Stream<MapState> _mapMapCreatedToState(MapCreated event) async* {
+    yield MapLoaded(event.controller);
+  }
 
-        await rootBundle
-            .loadString(event.darkMode ? nighttimeFilepath : daytimeFilepath)
-            .then((mapStyle) {
-          // Set the style
-          mapController.setMapStyle(mapStyle);
-        });
+  Stream<MapState> _mapUpdateMapThemeToState(UpdateMapTheme event) async* {
+    if (state is MapLoaded) {
+      GoogleMapController mapController = (state as MapLoaded).mapController;
 
-        yield MapLoaded(mapController);
-      }
-    }
+      await rootBundle
+          .loadString(event.darkMode ? nighttimeFilepath : daytimeFilepath)
+          .then((mapStyle) {
+        // Set the style
+        mapController.setMapStyle(mapStyle);
+      });
 
-    if (event is RefreshRiderDestination) {}
-
-    if (event is FetchRiderDestination) {
-      yield MapLoading();
-    }
-
-    if (event is FetchUserLocation) {
-      yield MapLoading();
+      yield MapLoaded(mapController);
     }
   }
 
