@@ -56,8 +56,8 @@ class NetworksBloc extends Bloc<NetworksEvent, NetworksState> {
   }
 
   @override
-  void close() {
+  Future<void> close() {
     _networksSubscription?.cancel();
-    super.close();
+    return super.close();
   }
 }

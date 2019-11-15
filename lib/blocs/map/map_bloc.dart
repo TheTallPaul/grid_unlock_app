@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grid_unlock/repositories/repositories.dart';
 
@@ -10,14 +11,14 @@ import '../blocs.dart';
 class MapBloc extends Bloc<MapEvent, MapState> {
   MapBloc(this.mapRepository, this.settingsBloc) {
     // Listeners
-    settingsSubscription = settingsBloc.listen((state) {
+    _settingsSubscription = settingsBloc.listen((state) {
       add(UpdateMapTheme(state.darkMode));
     });
   }
 
   final MapRepository mapRepository;
   final SettingsBloc settingsBloc;
-  StreamSubscription settingsSubscription;
+  StreamSubscription _settingsSubscription;
   static const daytimeFilepath = 'assets/maps/daytime_map_style.json';
   static const nighttimeFilepath = 'assets/maps/nighttime_map_style.json';
 
@@ -34,7 +35,14 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   Stream<MapState> _mapMapCreatedToState(MapCreated event) async* {
-    yield MapLoaded(event.controller);
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    GoogleMapController googleMapController = event.controller;
+    await googleMapController.moveCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(
+            target: LatLng(position.latitude, position.longitude),
+            zoom: 16.0)));
+    yield MapLoaded(googleMapController);
   }
 
   Stream<MapState> _mapUpdateMapThemeToState(UpdateMapTheme event) async* {
@@ -53,9 +61,9 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   @override
-  void close() {
+  Future<void> close() {
     // Cancel the subscription when the bloc closes
-    settingsSubscription.cancel();
-    super.close();
+    _settingsSubscription?.cancel();
+    return super.close();
   }
 }

@@ -19,14 +19,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_maps_flutter: ^0.5.21+8
+  google_maps_flutter: ^0.5.21+11
   google_maps_webservice: ^0.0.16
-  bloc: ^1.0.0
-  flutter_bloc: ^1.0.0
+  geolocator: ^5.1.5
+  bloc: ^2.0.0
+  flutter_bloc: ^2.0.0
   http: ^0.12.0+2
   json_serializable: ^3.2.3
   equatable: ^0.6.1
-  permission_handler: ^3.3.0
+  permission_handler: ^4.0.0
   flutter_google_places: ^0.2.3
   cloud_firestore: ^0.12.9+6
   firebase_core: ^0.4.1+5

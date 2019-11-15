@@ -21,7 +21,7 @@ class MapPage extends StatelessWidget {
           actions: <Widget>[
             BlocBuilder<MapBloc, MapState>(builder: (context, state) {
               if (state is MapLoading) {
-                return Icon(Icons.sync);
+                return LoadingIndicator();
               } else {
                 return IconButton(
                     icon: Icon(Icons.search),
@@ -34,7 +34,7 @@ class MapPage extends StatelessWidget {
                           height: 0,
                         ),
                       );
-                      print(prediction);
+                      print(prediction.placeId + prediction.description);
                     });
               }
             })
