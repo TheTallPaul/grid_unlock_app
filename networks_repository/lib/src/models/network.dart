@@ -20,7 +20,15 @@ class Network {
 
   @override
   String toString() {
-    return 'Network { date_created: $date_created, description: $description, id: $id, location: $location, name: $name, paid: $paid, public: $public }';
+    return '''Network {
+      date_created: $date_created,
+      description: $description,
+      id: $id,
+      location: $location,
+      name: $name,
+      paid: $paid,
+      public: $public 
+    }''';
   }
 
   NetworkEntity toEntity() {

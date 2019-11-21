@@ -19,7 +19,15 @@ class NetworkEntity extends Equatable {
 
   @override
   String toString() {
-    return 'NetworkEntity { date_created: $date_created, description: $description, id: $id, location: $location, name: $name, paid: $paid, public: $public }';
+    return '''NetworkEntity { 
+      date_created: $date_created,
+      description: $description,
+      id: $id,
+      location: $location,
+      name: $name,
+      paid: $paid,
+      public: $public 
+    }''';
   }
 
   static NetworkEntity fromJson(Map<String, Object> json) {

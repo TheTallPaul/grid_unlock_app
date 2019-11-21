@@ -1,0 +1,1 @@
+export 'ride_entity.dart';

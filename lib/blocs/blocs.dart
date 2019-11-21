@@ -4,5 +4,6 @@ export './map/map.dart';
 export './networks/networks.dart';
 export './permissions/permissions.dart';
 export './register/register.dart';
+export './rides/rides.dart';
 export './settings/settings.dart';
 export './simple_bloc_delegate.dart';

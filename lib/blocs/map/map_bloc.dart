@@ -31,23 +31,29 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       yield* _mapMapCreatedToState(event);
     } else if (event is UpdateMapTheme) {
       yield* _mapUpdateMapThemeToState(event);
+    } else if (event is UpdateRiderDestination) {
+      yield* _mapUpdateRiderDestinationToState(event);
     }
   }
 
   Stream<MapState> _mapMapCreatedToState(MapCreated event) async* {
     Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    double user_latitude = position.latitude;
+    double user_longitude = position.longitude;
     GoogleMapController googleMapController = event.controller;
+
     await googleMapController.moveCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
-            target: LatLng(position.latitude, position.longitude),
-            zoom: 16.0)));
-    yield MapLoaded(googleMapController);
+            target: LatLng(user_latitude, user_longitude), zoom: 16.0)));
+    yield MapLoaded(googleMapController, user_latitude, user_longitude);
   }
 
   Stream<MapState> _mapUpdateMapThemeToState(UpdateMapTheme event) async* {
     if (state is MapLoaded) {
       GoogleMapController mapController = (state as MapLoaded).mapController;
+      double user_latitude = (state as MapLoaded).user_latitude;
+      double user_longitude = (state as MapLoaded).user_longitude;
 
       await rootBundle
           .loadString(event.darkMode ? nighttimeFilepath : daytimeFilepath)
@@ -56,8 +62,13 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         mapController.setMapStyle(mapStyle);
       });
 
-      yield MapLoaded(mapController);
+      yield MapLoaded(mapController, user_latitude, user_longitude);
     }
+  }
+
+  Stream<MapState> _mapUpdateRiderDestinationToState(
+      UpdateRiderDestination event) async* {
+
   }
 
   @override
