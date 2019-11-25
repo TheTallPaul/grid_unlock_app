@@ -16,7 +16,7 @@ class NetworksHome extends StatelessWidget {
         body:
             BlocBuilder<NetworksBloc, NetworksState>(builder: (context, state) {
           if (state is NetworksLoading) {
-            return LoadingIndicator();
+            return const LoadingIndicator();
           }
           if (state is NetworksLoaded && state.networks.isEmpty) {
             return NetworksStartScreen();
@@ -35,7 +35,7 @@ class NetworksHome extends StatelessWidget {
               },
             );
           }
-          return LoadingIndicator();
+          return const LoadingIndicator();
         }));
   }
 }

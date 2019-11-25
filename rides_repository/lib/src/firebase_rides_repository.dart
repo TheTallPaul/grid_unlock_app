@@ -4,7 +4,8 @@ import '../rides_repository.dart';
 import 'entities/entities.dart';
 
 class FirebaseRidesRepository implements RidesRepository {
-  final rideCollection = Firestore.instance.collection('rides');
+  final CollectionReference rideCollection =
+      Firestore.instance.collection('rides');
 
   @override
   Future<void> addNewRide(Ride ride) {
@@ -15,8 +16,7 @@ class FirebaseRidesRepository implements RidesRepository {
   Stream<List<Ride>> rides() {
     return rideCollection.snapshots().map((snapshot) {
       return snapshot.documents
-          .map((document) =>
-              Ride.fromEntity(RideEntity.fromSnapshot(document)))
+          .map((document) => Ride.fromEntity(RideEntity.fromSnapshot(document)))
           .toList();
     });
   }

@@ -29,7 +29,7 @@ class NavigationDrawer extends StatelessWidget {
                 onTap: () => Navigator.pushReplacementNamed(
                     context, Router.networksRoute),
               ),
-              Divider(),
+              const Divider(),
               _createDrawerItem(
                 icon: Icons.settings,
                 text: 'Settings',
@@ -51,9 +51,9 @@ class NavigationDrawer extends StatelessWidget {
     return Container(
         height: 120,
         child: DrawerHeader(
-            margin: EdgeInsets.all(0),
-            padding: EdgeInsets.all(0),
-            decoration: BoxDecoration(color: Color(0xFF877b62)),
+            margin: const EdgeInsets.all(0),
+            padding: const EdgeInsets.all(0),
+            decoration: BoxDecoration(color: const Color(0xFF877b62)),
             child: Stack(children: <Widget>[
               Positioned(
                 top: 29.0,
@@ -76,7 +76,7 @@ class NavigationDrawer extends StatelessWidget {
         children: <Widget>[
           Icon(icon),
           Padding(
-            padding: EdgeInsets.only(left: 6.0),
+            padding: const EdgeInsets.only(left: 6.0),
             child: Text(text),
           )
         ],

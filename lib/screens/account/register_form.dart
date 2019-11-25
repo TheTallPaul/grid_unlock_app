@@ -72,7 +72,7 @@ class _RegisterFormState extends State<RegisterForm> {
       child: BlocBuilder<RegisterBloc, RegisterState>(
         builder: (context, state) {
           return Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Form(
               child: ListView(
                 children: <Widget>[

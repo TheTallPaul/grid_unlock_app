@@ -21,7 +21,7 @@ class MapPage extends StatelessWidget {
           actions: <Widget>[
             BlocBuilder<MapBloc, MapState>(builder: (context, state) {
               if (state is MapLoading) {
-                return LoadingIndicator();
+                return const LoadingIndicator();
               } else {
                 return IconButton(
                     icon: Icon(Icons.search),

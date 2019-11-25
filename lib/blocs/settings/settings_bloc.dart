@@ -13,8 +13,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
     if (event is ThemeToggled) {
-      ThemeData theme = state.darkMode ? primaryTheme() : nightTheme();
-      bool darkMode = !state.darkMode;
+      final ThemeData theme = state.darkMode ? primaryTheme() : nightTheme();
+      final bool darkMode = !state.darkMode;
 
       yield SettingsState(theme, darkMode);
     }

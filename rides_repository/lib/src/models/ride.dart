@@ -5,7 +5,7 @@ import '../entities/entities.dart';
 
 @immutable
 class Ride {
-  Ride(
+  const Ride(
       this.actual_dropoff_time,
       this.actual_pickup_time,
       this.driver_cancelled,
@@ -23,15 +23,15 @@ class Ride {
       double rider_rating_of_driver = -1,
       bool rider_reached_destination = false,
       String id})
-      : this.driver_comments = driver_comments,
-        this.driver_marked_completion = driver_marked_completion,
-        this.driver_rating_of_rider = driver_rating_of_rider,
-        this.rider_cancelled = rider_cancelled,
-        this.rider_comments = rider_comments,
-        this.rider_marked_completion = rider_marked_completion,
-        this.rider_rating_of_driver = rider_rating_of_driver,
-        this.rider_reached_destination = rider_reached_destination,
-        this.id = id;
+      : this.driver_comments = driver_comments ?? '',
+        this.driver_marked_completion = driver_marked_completion ?? false,
+        this.driver_rating_of_rider = driver_rating_of_rider ?? -1,
+        this.rider_cancelled = rider_cancelled ?? false,
+        this.rider_comments = rider_comments ?? '',
+        this.rider_marked_completion = rider_marked_completion ?? false,
+        this.rider_rating_of_driver = rider_rating_of_driver ?? -1,
+        this.rider_reached_destination = rider_reached_destination ?? false,
+        this.id = id ?? id;
 
   final Timestamp actual_dropoff_time;
   final Timestamp actual_pickup_time;
