@@ -4,7 +4,7 @@ import 'package:grid_unlock/blocs/blocs.dart';
 import 'package:grid_unlock/widgets/widgets.dart';
 
 class AccountHome extends StatelessWidget {
-  AccountHome({Key key, @required this.name}) : super(key: key);
+  const AccountHome({Key key, @required this.name}) : super(key: key);
 
   final String name;
 
@@ -12,7 +12,7 @@ class AccountHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Account'),
+        title: const Text('Account'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.exit_to_app),

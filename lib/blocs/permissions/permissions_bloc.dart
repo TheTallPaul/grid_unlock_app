@@ -8,7 +8,7 @@ class PermissionsBloc extends Bloc<PermissionsEvent, PermissionsState> {
   final PermissionHandler _permissionHandler = PermissionHandler();
 
   Future<bool> _requestPermission(PermissionGroup permission) async {
-    var result = await _permissionHandler.requestPermissions([permission]);
+    final result = await _permissionHandler.requestPermissions([permission]);
     if (result[permission] == PermissionStatus.granted) {
       return true;
     }
@@ -23,9 +23,9 @@ class PermissionsBloc extends Bloc<PermissionsEvent, PermissionsState> {
     if (event is RequestLocationPermission) {
       yield PermissionsRequesting();
       try {
-        yield (PermissionsRequested(
+        yield PermissionsRequested(
             locationWhenInUse:
-                _requestPermission(PermissionGroup.locationWhenInUse)));
+                _requestPermission(PermissionGroup.locationWhenInUse));
       } catch (_) {
         yield PermissionsError();
       }

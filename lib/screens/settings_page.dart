@@ -10,7 +10,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Settings'),
+          title: const Text('Settings'),
         ),
         drawer: NavigationDrawer(),
         body: ListView(
@@ -18,7 +18,7 @@ class SettingsPage extends StatelessWidget {
             BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
               return SwitchListTile(
                 value: state.darkMode,
-                title: Text('Dark Mode'),
+                title: const Text('Dark Mode'),
                 onChanged: (_) {
                   BlocProvider.of<SettingsBloc>(context).add(ThemeToggled());
                 },

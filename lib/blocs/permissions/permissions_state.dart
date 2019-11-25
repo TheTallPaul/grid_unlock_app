@@ -4,7 +4,10 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class PermissionsState extends Equatable {
-  PermissionsState([List props = const []]) : super();
+  const PermissionsState();
+
+  @override
+  List<Object> get props => [];
 }
 
 class PermissionsEmpty extends PermissionsState {
@@ -20,15 +23,12 @@ class PermissionsRequesting extends PermissionsState {
 }
 
 class PermissionsRequested extends PermissionsState {
-  PermissionsRequested({@required this.locationWhenInUse})
-      : assert(locationWhenInUse != null),
-        super([locationWhenInUse]);
+  const PermissionsRequested({@required this.locationWhenInUse});
 
   final Future<bool> locationWhenInUse;
 
   @override
-  // TODO: implement props
-  List<Object> get props => null;
+  List<Object> get props => [locationWhenInUse];
 }
 
 class PermissionsError extends PermissionsState {

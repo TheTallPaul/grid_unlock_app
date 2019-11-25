@@ -9,12 +9,12 @@ class CreateNetworkScreen extends StatelessWidget {
     return BlocBuilder<NetworksBloc, NetworksState>(builder: (context, state) {
       return Scaffold(
           appBar: AppBar(
-            title: Text('Networks'),
+            title: const Text('Networks'),
           ),
           drawer: NavigationDrawer(),
           body: Container(
             child: Column(children: <Widget>[
-              Image(image: AssetImage('assets/images/networks_splash.png')),
+              Image(image: const AssetImage('assets/images/networks_splash.png')),
               Text(
                 "Networks connect you to communties of people you can trust to share rides with.",
                 textAlign: TextAlign.center,

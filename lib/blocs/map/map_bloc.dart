@@ -4,19 +4,17 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:grid_unlock/repositories/repositories.dart';
 
 import '../blocs.dart';
 
 class MapBloc extends Bloc<MapEvent, MapState> {
-  MapBloc(this.mapRepository, this.settingsBloc) {
+  MapBloc(this.settingsBloc) {
     // Listeners
     _settingsSubscription = settingsBloc.listen((state) {
       add(UpdateMapTheme(state.darkMode));
     });
   }
 
-  final MapRepository mapRepository;
   final SettingsBloc settingsBloc;
   StreamSubscription _settingsSubscription;
   static const daytimeFilepath = 'assets/maps/daytime_map_style.json';
@@ -37,11 +35,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   }
 
   Stream<MapState> _mapMapCreatedToState(MapCreated event) async* {
-    Position position = await Geolocator()
+    final Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-    double user_latitude = position.latitude;
-    double user_longitude = position.longitude;
-    GoogleMapController googleMapController = event.controller;
+    final double user_latitude = position.latitude;
+    final double user_longitude = position.longitude;
+    final GoogleMapController googleMapController = event.controller;
 
     await googleMapController.moveCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
@@ -51,9 +49,10 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   Stream<MapState> _mapUpdateMapThemeToState(UpdateMapTheme event) async* {
     if (state is MapLoaded) {
-      GoogleMapController mapController = (state as MapLoaded).mapController;
-      double user_latitude = (state as MapLoaded).user_latitude;
-      double user_longitude = (state as MapLoaded).user_longitude;
+      final GoogleMapController mapController =
+          (state as MapLoaded).mapController;
+      final double user_latitude = (state as MapLoaded).user_latitude;
+      final double user_longitude = (state as MapLoaded).user_longitude;
 
       await rootBundle
           .loadString(event.darkMode ? nighttimeFilepath : daytimeFilepath)
@@ -68,7 +67,18 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
   Stream<MapState> _mapUpdateRiderDestinationToState(
       UpdateRiderDestination event) async* {
+    if (state is MapLoaded) {
+      final Position position = await Geolocator()
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      final double user_latitude = position.latitude;
+      final double user_longitude = position.longitude;
+      final GoogleMapController mapController =
+          (state as MapLoaded).mapController;
 
+      await mapController.moveCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(
+              target: LatLng(user_latitude, user_longitude), zoom: 16.0)));
+    }
   }
 
   @override

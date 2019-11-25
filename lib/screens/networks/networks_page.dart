@@ -6,7 +6,7 @@ import 'package:grid_unlock/screens/screens.dart';
 import 'package:user_repository/user_repository.dart';
 
 class NetworksPage extends StatelessWidget {
-  NetworksPage({@required UserRepository userRepository})
+  const NetworksPage({@required UserRepository userRepository})
       : assert(userRepository != null),
         _userRepository = userRepository;
 

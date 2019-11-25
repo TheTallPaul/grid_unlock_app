@@ -5,7 +5,7 @@ import 'package:grid_unlock/screens/screens.dart';
 import 'package:user_repository/user_repository.dart';
 
 class RegisterScreen extends StatelessWidget {
-  RegisterScreen({Key key, @required UserRepository userRepository})
+  const RegisterScreen({@required UserRepository userRepository, Key key})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -15,7 +15,7 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Register')),
+      appBar: AppBar(title: const Text('Register')),
       body: Center(
         child: BlocProvider<RegisterBloc>(
           builder: (context) => RegisterBloc(userRepository: _userRepository),

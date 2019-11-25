@@ -11,13 +11,13 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final initialCoordinates =
+    const initialCoordinates =
         LatLng(45.518880, -122.679133); // Pioneer Courthouse Square
-    final initialZoom = 16.0;
+    const initialZoom = 16.0;
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Rider'),
+          title: const Text('Rider'),
           actions: <Widget>[
             BlocBuilder<MapBloc, MapState>(builder: (context, state) {
               if (state is MapLoading) {
@@ -26,7 +26,7 @@ class MapPage extends StatelessWidget {
                 return IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () async {
-                      Prediction prediction = await PlacesAutocomplete.show(
+                      final Prediction prediction = await PlacesAutocomplete.show(
                         context: context,
                         apiKey: Keys.kGoogleApiKey,
                         mode: Mode.overlay,

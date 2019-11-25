@@ -10,7 +10,7 @@ class NetworksHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Networks'),
+          title: const Text('Networks'),
         ),
         drawer: NavigationDrawer(),
         body:
@@ -41,10 +41,10 @@ class NetworksHome extends StatelessWidget {
 }
 
 class NetworkItem extends StatelessWidget {
-  NetworkItem({
-    Key key,
+  const NetworkItem({
     @required this.onTap,
     @required this.network,
+    Key key,
   }) : super(key: key);
 
   final GestureTapCallback onTap;

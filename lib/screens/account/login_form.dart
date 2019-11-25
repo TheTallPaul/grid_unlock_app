@@ -5,7 +5,7 @@ import 'package:grid_unlock/widgets/widgets.dart';
 import 'package:user_repository/user_repository.dart';
 
 class LoginForm extends StatefulWidget {
-  LoginForm({Key key, @required UserRepository userRepository})
+  const LoginForm({@required UserRepository userRepository, Key key})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -50,7 +50,7 @@ class _LoginFormState extends State<LoginForm> {
               SnackBar(
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text('Login Failure'), Icon(Icons.error)],
+                  children: [const Text('Login Failure'), Icon(Icons.error)],
                 ),
                 backgroundColor: Colors.red,
               ),
@@ -64,8 +64,8 @@ class _LoginFormState extends State<LoginForm> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Logging In...'),
-                    CircularProgressIndicator(),
+                    const Text('Logging In...'),
+                    const CircularProgressIndicator(),
                   ],
                 ),
               ),
@@ -78,12 +78,12 @@ class _LoginFormState extends State<LoginForm> {
       child: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           return Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Form(
               child: ListView(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Image.asset('assets/images/account_login.png',
                         height: 200),
                   ),
@@ -113,7 +113,7 @@ class _LoginFormState extends State<LoginForm> {
                     },
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 20),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[

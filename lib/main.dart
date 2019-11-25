@@ -16,17 +16,17 @@ void main() {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final settingsBloc = SettingsBloc();
+
     return MultiBlocProvider(
         providers: [
           BlocProvider<SettingsBloc>(
             builder: (context) {
-              return SettingsBloc();
+              return settingsBloc;
             },
           ),
           BlocProvider<MapBloc>(
-            builder: (context) => MapBloc(
-                MapRepository(googleMapsApiClient: GoogleMapsApiClient()),
-                SettingsBloc()),
+            builder: (context) => MapBloc(settingsBloc),
           ),
           BlocProvider<PermissionsBloc>(
             builder: (context) {

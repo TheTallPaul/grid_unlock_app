@@ -3,7 +3,7 @@ import 'package:grid_unlock/screens/screens.dart';
 import 'package:user_repository/user_repository.dart';
 
 class CreateAccountButton extends StatelessWidget {
-  CreateAccountButton({Key key, @required UserRepository userRepository})
+  const CreateAccountButton({@required UserRepository userRepository, Key key})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -13,16 +13,16 @@ class CreateAccountButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
-      child: Text(
-        'Create an Account',
-      ),
       onPressed: () {
         Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) {
+          MaterialPageRoute<void>(builder: (context) {
             return RegisterScreen(userRepository: _userRepository);
           }),
         );
       },
+      child: const Text(
+        'Create an Account',
+      ),
     );
   }
 }

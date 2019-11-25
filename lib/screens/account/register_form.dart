@@ -41,8 +41,8 @@ class _RegisterFormState extends State<RegisterForm> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Registering...'),
-                    CircularProgressIndicator(),
+                    const Text('Registering...'),
+                    const CircularProgressIndicator(),
                   ],
                 ),
               ),
@@ -60,7 +60,7 @@ class _RegisterFormState extends State<RegisterForm> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Registration Failure'),
+                    const Text('Registration Failure'),
                     Icon(Icons.error),
                   ],
                 ),

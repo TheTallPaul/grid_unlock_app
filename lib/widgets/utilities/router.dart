@@ -9,23 +9,23 @@ class Router {
   static const settingsRoute = '/settings';
 
   static Route<dynamic> generateRoute(RouteSettings routeSettings) {
-    UserRepository userRepository = UserRepository();
+    final UserRepository userRepository = UserRepository();
 
     switch (routeSettings.name) {
       case mapRoute:
-        return MaterialPageRoute(builder: (_) => MapPage());
+        return MaterialPageRoute<void>(builder: (_) => MapPage());
       case accountRoute:
-        return MaterialPageRoute(
+        return MaterialPageRoute<void>(
             builder: (_) => AccountPage(
                   userRepository: userRepository,
                 ));
       case networksRoute:
-        return MaterialPageRoute(
+        return MaterialPageRoute<void>(
             builder: (_) => NetworksPage(userRepository: userRepository));
       case settingsRoute:
-        return MaterialPageRoute(builder: (_) => SettingsPage());
+        return MaterialPageRoute<void>(builder: (_) => SettingsPage());
       default:
-        return MaterialPageRoute(builder: (_) => MapPage());
+        return MaterialPageRoute<void>(builder: (_) => MapPage());
     }
   }
 }

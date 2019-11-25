@@ -6,7 +6,7 @@ import 'package:grid_unlock/widgets/widgets.dart';
 import 'package:user_repository/user_repository.dart';
 
 class LoginScreen extends StatelessWidget {
-  LoginScreen({Key key, @required UserRepository userRepository})
+  const LoginScreen({@required UserRepository userRepository, Key key})
       : assert(userRepository != null),
         _userRepository = userRepository,
         super(key: key);
@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Login')),
+      appBar: AppBar(title: const Text('Login')),
       drawer: NavigationDrawer(),
       body: BlocProvider<LoginBloc>(
         builder: (context) => LoginBloc(userRepository: _userRepository),
