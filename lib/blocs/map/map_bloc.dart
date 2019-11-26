@@ -4,6 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/places.dart';
+import 'package:grid_unlock/widgets/widgets.dart';
 
 import '../blocs.dart';
 
@@ -19,6 +21,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   StreamSubscription _settingsSubscription;
   static const daytimeFilepath = 'assets/maps/daytime_map_style.json';
   static const nighttimeFilepath = 'assets/maps/nighttime_map_style.json';
+  static const defaultZoom = 16.0;
 
   @override
   MapState get initialState => MapLoading();
@@ -43,7 +46,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
 
     await googleMapController.moveCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
-            target: LatLng(user_latitude, user_longitude), zoom: 16.0)));
+            target: LatLng(user_latitude, user_longitude), zoom: defaultZoom)));
     yield MapLoaded(googleMapController, user_latitude, user_longitude);
   }
 
@@ -74,10 +77,21 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       final double user_longitude = position.longitude;
       final GoogleMapController mapController =
           (state as MapLoaded).mapController;
+      final GoogleMapsPlaces googleMapsPlaces =
+          GoogleMapsPlaces(apiKey: Keys.kGoogleApiKey);
 
-      await mapController.moveCamera(CameraUpdate.newCameraPosition(
+      final PlacesDetailsResponse placesDetailsResponse =
+          await googleMapsPlaces.getDetailsByPlaceId(event.destination.placeId);
+
+      final double destination_latitude =
+          placesDetailsResponse.result.geometry.location.lat;
+      final double destination_longitude =
+          placesDetailsResponse.result.geometry.location.lng;
+
+      await mapController.animateCamera(CameraUpdate.newCameraPosition(
           CameraPosition(
-              target: LatLng(user_latitude, user_longitude), zoom: 16.0)));
+              target: LatLng(destination_latitude, destination_longitude),
+              zoom: defaultZoom)));
     }
   }
 

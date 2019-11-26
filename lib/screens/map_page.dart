@@ -26,7 +26,8 @@ class MapPage extends StatelessWidget {
                 return IconButton(
                     icon: Icon(Icons.search),
                     onPressed: () async {
-                      final Prediction prediction = await PlacesAutocomplete.show(
+                      final Prediction prediction =
+                          await PlacesAutocomplete.show(
                         context: context,
                         apiKey: Keys.kGoogleApiKey,
                         mode: Mode.overlay,
@@ -34,7 +35,8 @@ class MapPage extends StatelessWidget {
                           height: 0,
                         ),
                       );
-                      print(prediction.placeId + prediction.description);
+                      BlocProvider.of<MapBloc>(context)
+                          .add(UpdateRiderDestination(prediction));
                     });
               }
             })
