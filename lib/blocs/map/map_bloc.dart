@@ -24,7 +24,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   static const defaultZoom = 16.0;
 
   @override
-  MapState get initialState => MapLoading();
+  MapState get initialState => const MapLoading(<Marker>{});
 
   @override
   Stream<MapState> mapEventToState(MapEvent event) async* {
@@ -43,11 +43,14 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     final double user_latitude = position.latitude;
     final double user_longitude = position.longitude;
     final GoogleMapController googleMapController = event.controller;
+    final Set<Marker> markers =
+        state is MapLoading ? <Marker>{} : (state as MapLoaded).markers;
 
     await googleMapController.moveCamera(CameraUpdate.newCameraPosition(
         CameraPosition(
             target: LatLng(user_latitude, user_longitude), zoom: defaultZoom)));
-    yield MapLoaded(googleMapController, user_latitude, user_longitude);
+    yield MapLoaded(
+        googleMapController, user_latitude, user_longitude, markers);
   }
 
   Stream<MapState> _mapUpdateMapThemeToState(UpdateMapTheme event) async* {
@@ -56,6 +59,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           (state as MapLoaded).mapController;
       final double user_latitude = (state as MapLoaded).user_latitude;
       final double user_longitude = (state as MapLoaded).user_longitude;
+      final Set<Marker> markers = (state as MapLoaded).markers;
 
       await rootBundle
           .loadString(event.darkMode ? nighttimeFilepath : daytimeFilepath)
@@ -64,7 +68,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
         mapController.setMapStyle(mapStyle);
       });
 
-      yield MapLoaded(mapController, user_latitude, user_longitude);
+      yield MapLoaded(mapController, user_latitude, user_longitude, markers);
     }
   }
 
@@ -77,6 +81,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       final double user_longitude = position.longitude;
       final GoogleMapController mapController =
           (state as MapLoaded).mapController;
+      final Set<Marker> markers = (state as MapLoaded).markers;
       final GoogleMapsPlaces googleMapsPlaces =
           GoogleMapsPlaces(apiKey: Keys.kGoogleApiKey);
 
@@ -92,6 +97,8 @@ class MapBloc extends Bloc<MapEvent, MapState> {
           CameraPosition(
               target: LatLng(destination_latitude, destination_longitude),
               zoom: defaultZoom)));
+
+      yield MapLoaded(mapController, user_latitude, user_longitude, markers);
     }
   }
 

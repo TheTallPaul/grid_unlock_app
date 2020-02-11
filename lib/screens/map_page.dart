@@ -11,8 +11,7 @@ class MapPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const initialCoordinates =
-        LatLng(45.518880, -122.679133); // Pioneer Courthouse Square
+    const initialCoordinates = LatLng(0, 0);
     const initialZoom = 16.0;
 
     return Scaffold(
@@ -44,8 +43,8 @@ class MapPage extends StatelessWidget {
         ),
         drawer: NavigationDrawer(),
         body: GoogleMap(
-          initialCameraPosition:
-              CameraPosition(target: initialCoordinates, zoom: initialZoom),
+          initialCameraPosition: const CameraPosition(
+              target: initialCoordinates, zoom: initialZoom),
           onMapCreated: (GoogleMapController controller) {
             BlocProvider.of<MapBloc>(context).add(MapCreated(controller));
             BlocProvider.of<MapBloc>(context).add(UpdateMapTheme(
@@ -53,6 +52,7 @@ class MapPage extends StatelessWidget {
           },
           myLocationEnabled: true,
           compassEnabled: true,
+          markers: BlocProvider.of<MapBloc>(context).state.markers,
         ));
   }
 }

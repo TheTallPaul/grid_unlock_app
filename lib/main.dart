@@ -21,25 +21,25 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<SettingsBloc>(
-            builder: (context) {
+            create: (context) {
               return settingsBloc;
             },
           ),
           BlocProvider<MapBloc>(
-            builder: (context) => MapBloc(settingsBloc),
+            create: (context) => MapBloc(settingsBloc),
           ),
           BlocProvider<PermissionsBloc>(
-            builder: (context) {
+            create: (context) {
               return PermissionsBloc();
             },
           ),
           BlocProvider<AuthenticationBloc>(
-            builder: (context) {
+            create: (context) {
               return AuthenticationBloc(userRepository: UserRepository())
                 ..add(AppStarted());
             },
           ),
-          BlocProvider<NetworksBloc>(builder: (context) {
+          BlocProvider<NetworksBloc>(create: (context) {
             return NetworksBloc(
                 networksRepository: FirebaseNetworksRepository())
               ..add(LoadNetworks());

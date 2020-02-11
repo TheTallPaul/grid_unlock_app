@@ -23,15 +23,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Stream<LoginEvent> events,
     Stream<LoginState> Function(LoginEvent event) next,
   ) {
-    final observableStream = events as Observable<LoginEvent>;
-    final nonDebounceStream = observableStream.where((event) {
+    final nonDebounceStream = events.where((event) {
       return event is! LoginEmailChanged && event is! LoginPasswordChanged;
     });
-    final debounceStream = observableStream.where((event) {
+    final debounceStream = events.where((event) {
       return event is LoginEmailChanged || event is LoginPasswordChanged;
-    }).debounceTime(Duration(milliseconds: 300));
-    return super
-        .transformEvents(nonDebounceStream.mergeWith([debounceStream]), next);
+    }).debounceTime(const Duration(milliseconds: 300));
+    return super.transformEvents(
+      nonDebounceStream.mergeWith([debounceStream]),
+      next,
+    );
   }
 
   @override
